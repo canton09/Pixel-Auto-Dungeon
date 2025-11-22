@@ -14,37 +14,37 @@ const HeroCard: React.FC<{ hero: Hero }> = ({ hero }) => {
   const mpPercent = (hero.stats.mp / hero.stats.maxMp) * 100;
   
   return (
-    <div className="bg-zinc-900 border-2 border-zinc-700 p-2 flex flex-col gap-1 text-xs relative overflow-hidden group">
+    <div className="bg-zinc-900 border sm:border-2 border-zinc-700 p-1.5 sm:p-2 flex flex-col gap-1 text-xs relative overflow-hidden group h-full justify-between">
         {/* Class Icon / Avatar */}
         <div className="flex gap-2 items-start mb-1">
-            <div className="border border-zinc-700 bg-black p-1">
-                 <HeroAvatar hClass={hero.class} size="w-8 h-8" />
+            <div className="border border-zinc-700 bg-black p-0.5 sm:p-1 shrink-0">
+                 <HeroAvatar hClass={hero.class} size="w-6 h-6 sm:w-8 sm:h-8" />
             </div>
-            <div className="flex flex-col w-full">
-                <div className={`font-bold text-sm ${hero.avatarColor}`}>{hero.name}</div>
-                <div className="text-zinc-500 text-[10px]">{hero.class === HeroClass.Paladin ? '坦克' : hero.class === HeroClass.Priest ? '治疗' : '输出'}</div>
+            <div className="flex flex-col w-full min-w-0">
+                <div className={`font-bold text-[10px] sm:text-sm truncate ${hero.avatarColor}`}>{hero.name}</div>
+                <div className="text-zinc-500 text-[9px] sm:text-[10px] hidden sm:block">{hero.class === HeroClass.Paladin ? '坦克' : hero.class === HeroClass.Priest ? '治疗' : '输出'}</div>
                 
                  {/* HP Bar */}
-                <div className="w-full h-1.5 bg-zinc-800 rounded-sm overflow-hidden mt-1 border border-zinc-600 relative">
+                <div className="w-full h-1 sm:h-1.5 bg-zinc-800 rounded-sm overflow-hidden mt-1 border border-zinc-600 relative">
                     <div className="h-full bg-red-500 transition-all duration-300" style={{ width: `${Math.max(0, hpPercent)}%` }}></div>
                 </div>
                 {/* MP Bar */}
-                <div className="w-full h-1 bg-zinc-800 rounded-sm overflow-hidden mt-0.5 relative">
+                <div className="w-full h-0.5 sm:h-1 bg-zinc-800 rounded-sm overflow-hidden mt-0.5 relative">
                     <div className="h-full bg-blue-500 transition-all duration-300" style={{ width: `${Math.max(0, mpPercent)}%` }}></div>
                 </div>
             </div>
         </div>
 
         {/* Stats Compact */}
-        <div className="grid grid-cols-2 gap-x-2 text-[10px] text-zinc-400 bg-black/40 p-1 rounded">
-            <div className="flex items-center gap-1"><Sword size={10} className="text-red-400"/> <span className="text-zinc-300">{hero.stats.atk}</span></div>
-            <div className="flex items-center gap-1"><Shield size={10} className="text-blue-400"/> <span className="text-zinc-300">{hero.stats.def}</span></div>
-            <div className="flex items-center gap-1"><Heart size={10} className="text-green-400"/> <span className="text-zinc-300">{Math.floor(hero.stats.hp)}</span></div>
-            <div className="flex items-center gap-1"><Zap size={10} className="text-yellow-400"/> <span className="text-zinc-300">{hero.stats.spd}</span></div>
+        <div className="grid grid-cols-2 gap-x-1 sm:gap-x-2 text-[9px] sm:text-[10px] text-zinc-400 bg-black/40 p-0.5 sm:p-1 rounded">
+            <div className="flex items-center gap-0.5 sm:gap-1"><Sword size={8} className="text-red-400 sm:w-2.5 sm:h-2.5"/> <span className="text-zinc-300">{hero.stats.atk}</span></div>
+            <div className="flex items-center gap-0.5 sm:gap-1"><Shield size={8} className="text-blue-400 sm:w-2.5 sm:h-2.5"/> <span className="text-zinc-300">{hero.stats.def}</span></div>
+            <div className="flex items-center gap-0.5 sm:gap-1"><Heart size={8} className="text-green-400 sm:w-2.5 sm:h-2.5"/> <span className="text-zinc-300">{Math.floor(hero.stats.hp)}</span></div>
+            <div className="flex items-center gap-0.5 sm:gap-1"><Zap size={8} className="text-yellow-400 sm:w-2.5 sm:h-2.5"/> <span className="text-zinc-300">{hero.stats.spd}</span></div>
         </div>
 
         {/* Equipment Grid */}
-        <div className="grid grid-cols-5 gap-1 mt-2 border-t border-zinc-800 pt-2">
+        <div className="grid grid-cols-5 gap-0.5 sm:gap-1 mt-1 sm:mt-2 border-t border-zinc-800 pt-1 sm:pt-2">
             {[EquipmentSlot.Head, EquipmentSlot.Body, EquipmentSlot.Hands, EquipmentSlot.Feet, EquipmentSlot.Weapon].map(slot => {
                 const item = hero.equipment[slot];
                 let rarityColor = 'border-zinc-800 bg-zinc-950 text-zinc-600';
@@ -61,19 +61,19 @@ const HeroCard: React.FC<{ hero: Hero }> = ({ hero }) => {
                 return (
                     <div 
                         key={slot} 
-                        className={`w-full aspect-square border ${rarityColor} flex items-center justify-center text-[8px] cursor-help relative group/item`}
+                        className={`w-full aspect-square border ${rarityColor} flex items-center justify-center text-[7px] sm:text-[8px] cursor-help relative group/item`}
                     >
                         {item ? SLOT_DISPLAY[slot][0] : <span className="opacity-20">{SLOT_DISPLAY[slot][0]}</span>}
                         
                         {/* Tooltip */}
                         {item && (
-                             <div className="hidden group-hover/item:block absolute bottom-full left-0 z-50 bg-black border border-white p-2 min-w-[120px] pointer-events-none mb-1 shadow-xl">
-                                <div className="font-bold text-white mb-1">{item.name}</div>
-                                <div className="text-[9px] text-gray-400 mb-1">{item.rarity} {SLOT_DISPLAY[item.slot]}</div>
+                             <div className="hidden group-hover/item:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 z-[100] bg-black border border-white p-2 min-w-[100px] sm:min-w-[120px] pointer-events-none shadow-xl">
+                                <div className="font-bold text-white mb-1 text-[10px] sm:text-xs whitespace-nowrap">{item.name}</div>
+                                <div className="text-[8px] sm:text-[9px] text-gray-400 mb-1">{item.rarity} {SLOT_DISPLAY[item.slot]}</div>
                                 {Object.entries(item.stats).map(([key, val]) => (
-                                    <div key={key} className="text-gray-300 text-[9px] uppercase">{key}: +{val}</div>
+                                    <div key={key} className="text-gray-300 text-[8px] sm:text-[9px] uppercase">{key}: +{val}</div>
                                 ))}
-                                <div className="text-[9px] text-yellow-500 mt-1">评分: {Math.floor(item.score)}</div>
+                                <div className="text-[8px] sm:text-[9px] text-yellow-500 mt-1">评分: {Math.floor(item.score)}</div>
                              </div>
                         )}
                     </div>
@@ -86,7 +86,7 @@ const HeroCard: React.FC<{ hero: Hero }> = ({ hero }) => {
 
 const PartyPanel: React.FC<Props> = ({ party }) => {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-6 gap-2 p-2 bg-black border-t-4 border-zinc-800">
+    <div className="grid grid-cols-3 lg:grid-cols-6 gap-1 sm:gap-2 p-1 sm:p-2 bg-black border-t-2 sm:border-t-4 border-zinc-800">
         {party.map(h => <HeroCard key={h.id} hero={h} />)}
     </div>
   );

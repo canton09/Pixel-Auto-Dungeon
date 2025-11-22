@@ -20,7 +20,7 @@ const MapDisplay: React.FC<Props> = ({ map, partyPos, party }) => {
       for (let x = partyPos.x - HALF_VIEW; x <= partyPos.x + HALF_VIEW; x++) {
         // Check bounds
         if (x < 0 || x >= map.width || y < 0 || y >= map.height) {
-           row.push(<div key={`${x}-${y}`} className="w-16 h-16 bg-black" />);
+           row.push(<div key={`${x}-${y}`} className="w-10 h-10 sm:w-16 sm:h-16 bg-black" />);
            continue;
         }
 
@@ -49,14 +49,14 @@ const MapDisplay: React.FC<Props> = ({ map, partyPos, party }) => {
           }
 
           if (tile.type === 'start') {
-             content = <div className="text-[10px] text-white/50 text-center mt-6">入口</div>;
+             content = <div className="text-[8px] sm:text-[10px] text-white/50 text-center mt-4 sm:mt-6">入口</div>;
           }
 
           if (tile.type === 'boss') {
              content = (
                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 bg-red-900/50 rounded-full animate-pulse border-2 border-red-500 flex items-center justify-center shadow-[0_0_15px_rgba(239,68,68,0.6)]">
-                        <span className="text-xl">☠️</span>
+                    <div className="w-6 h-6 sm:w-10 sm:h-10 bg-red-900/50 rounded-full animate-pulse border-2 border-red-500 flex items-center justify-center shadow-[0_0_15px_rgba(239,68,68,0.6)]">
+                        <span className="text-sm sm:text-xl">☠️</span>
                     </div>
                  </div>
              );
@@ -65,7 +65,7 @@ const MapDisplay: React.FC<Props> = ({ map, partyPos, party }) => {
           if (tile.hasEnemy && !isParty && tile.type !== 'boss') {
              content = (
                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-6 h-6 bg-purple-900/80 rounded-full animate-bounce shadow-[0_0_10px_rgba(147,51,234,0.5)]"></div>
+                    <div className="w-4 h-4 sm:w-6 sm:h-6 bg-purple-900/80 rounded-full animate-bounce shadow-[0_0_10px_rgba(147,51,234,0.5)]"></div>
                  </div>
              );
           }
@@ -74,16 +74,16 @@ const MapDisplay: React.FC<Props> = ({ map, partyPos, party }) => {
         row.push(
           <div 
             key={`${x}-${y}`} 
-            className={`w-16 h-16 relative border border-white/5 flex-shrink-0 flex items-center justify-center overflow-hidden ${bgStyle}`}
+            className={`w-10 h-10 sm:w-16 sm:h-16 relative border border-white/5 flex-shrink-0 flex items-center justify-center overflow-hidden ${bgStyle}`}
           >
             {content}
             
             {/* Render Party Grid inside current tile */}
             {isParty && (
-              <div className="grid grid-cols-3 gap-[1px] p-[2px] w-full h-full z-10 bg-black/20 backdrop-blur-[1px]">
+              <div className="grid grid-cols-3 gap-[1px] p-[1px] sm:p-[2px] w-full h-full z-10 bg-black/20 backdrop-blur-[1px]">
                   {party.map(hero => (
                     <div key={hero.id} className="flex items-center justify-center">
-                        <HeroAvatar hClass={hero.class} size="w-4 h-4" />
+                        <HeroAvatar hClass={hero.class} size="w-2.5 h-2.5 sm:w-4 sm:h-4" />
                     </div>
                   ))}
               </div>
@@ -97,15 +97,15 @@ const MapDisplay: React.FC<Props> = ({ map, partyPos, party }) => {
   }, [map, partyPos, party]);
 
   return (
-    <div className="relative border-4 border-stone-600 bg-zinc-900 shadow-2xl shadow-black overflow-hidden rounded-sm">
+    <div className="relative border-2 sm:border-4 border-stone-600 bg-zinc-900 shadow-2xl shadow-black overflow-hidden rounded-sm max-w-full">
         {/* Map Header */}
-        <div className="absolute top-0 left-0 right-0 bg-black/90 text-white p-2 z-20 flex justify-between items-center border-b border-white/10 backdrop-blur-sm">
-            <span className="text-yellow-500 font-bold drop-shadow-md">{map.theme.name}</span>
-            <span className="text-xs text-gray-400 font-mono">Lvl {map.level}</span>
+        <div className="absolute top-0 left-0 right-0 bg-black/90 text-white p-1 sm:p-2 z-20 flex justify-between items-center border-b border-white/10 backdrop-blur-sm">
+            <span className="text-yellow-500 font-bold drop-shadow-md text-sm sm:text-base">{map.theme.name}</span>
+            <span className="text-[10px] sm:text-xs text-gray-400 font-mono">Lvl {map.level}</span>
         </div>
         
         {/* Map Grid */}
-        <div className="flex flex-col p-1 bg-black">
+        <div className="flex flex-col p-0.5 sm:p-1 bg-black items-center justify-center">
             {tiles}
         </div>
 

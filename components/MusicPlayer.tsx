@@ -315,16 +315,16 @@ const MusicPlayer: React.FC<Props> = ({ phase, sfxTrigger }) => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-50">
       <button 
         onClick={toggleMute}
-        className={`flex items-center justify-center w-12 h-12 rounded-full border-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] active:translate-x-[4px] transition-all ${isPlaying ? 'bg-green-600 border-green-800 text-white' : 'bg-red-600 border-red-800 text-white'}`}
+        className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 sm:border-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[2px] active:translate-x-[2px] transition-all ${isPlaying ? 'bg-green-600 border-green-800 text-white' : 'bg-red-600 border-red-800 text-white'}`}
         title={isPlaying ? "静音 (Mute)" : "开启音乐 (Play Music)"}
       >
-        {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
+        {isPlaying ? <Volume2 size={20} className="sm:w-6 sm:h-6" /> : <VolumeX size={20} className="sm:w-6 sm:h-6" />}
       </button>
       {!isPlaying && (
-          <div className="absolute bottom-16 right-0 w-40 bg-black text-yellow-400 text-xs p-2 border-2 border-white font-mono text-center animate-bounce shadow-[4px_4px_0_0_rgba(255,255,255,0.5)]">
+          <div className="absolute bottom-12 sm:bottom-16 right-0 w-32 sm:w-40 bg-black text-yellow-400 text-[10px] sm:text-xs p-1 sm:p-2 border border-white font-mono text-center animate-bounce shadow-[2px_2px_0_0_rgba(255,255,255,0.5)]">
               点击开启 BGM & SFX
           </div>
       )}

@@ -328,33 +328,33 @@ function App() {
   }, [tick]);
 
   return (
-    <div className="w-full min-h-screen bg-neutral-900 flex flex-col items-center p-2 sm:p-4 relative text-zinc-300 font-vt323">
+    <div className="w-full min-h-screen bg-neutral-900 flex flex-col items-center p-1 sm:p-4 relative text-zinc-300 font-vt323 overflow-hidden">
       <MusicPlayer phase={phase} sfxTrigger={sfxTrigger} />
       <div className="absolute inset-0 pointer-events-none crt-overlay z-50"></div>
 
-      <div className="max-w-6xl w-full flex flex-col gap-4 z-10">
+      <div className="max-w-6xl w-full flex flex-col gap-2 sm:gap-4 z-10 h-full">
         
         {/* Header */}
-        <div className="flex justify-between items-end border-b-4 border-zinc-700 pb-2">
+        <div className="flex justify-between items-end border-b-2 sm:border-b-4 border-zinc-700 pb-1 sm:pb-2">
             <div>
-                 <h1 className="text-3xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 drop-shadow-md">
+                 <h1 className="text-xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 drop-shadow-md">
                     像素自动地牢循环
                 </h1>
-                <p className="text-zinc-500 text-sm mt-1 tracking-widest uppercase">Pixel Auto Dungeon: Infinite Loop</p>
+                <p className="text-zinc-500 text-[10px] sm:text-sm mt-1 tracking-widest uppercase">Pixel Auto Dungeon: Infinite Loop</p>
             </div>
             
             <div className="text-right">
-                <div className={`text-2xl font-bold uppercase tracking-widest ${phase === GamePhase.Combat ? 'text-red-500 animate-pulse' : 'text-green-500'}`}>
+                <div className={`text-sm sm:text-2xl font-bold uppercase tracking-widest ${phase === GamePhase.Combat ? 'text-red-500 animate-pulse' : 'text-green-500'}`}>
                     {phase === GamePhase.Exploring ? '>>> 探索中 <<<' : (phase === GamePhase.Combat || phase === GamePhase.CombatVictory) ? '!!! 战斗中 !!!' : '... 传送中 ...'}
                 </div>
             </div>
         </div>
 
         {/* Main Viewport */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2 sm:gap-4 flex-1">
             
             {/* Main Stage: Switches between Map and Combat */}
-            <div className="w-full flex justify-center min-h-[500px]">
+            <div className="w-full flex justify-center min-h-[300px] sm:min-h-[500px]">
                 {(phase === GamePhase.Combat || phase === GamePhase.CombatVictory) && combatState && map ? (
                     <CombatScene 
                         party={party} 
@@ -369,11 +369,11 @@ function App() {
             </div>
 
             {/* Bottom Panel: Stats and Logs */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 sm:gap-4 flex-1">
                  <div className="lg:col-span-2">
                     <PartyPanel party={party} />
                  </div>
-                 <div className="lg:col-span-1">
+                 <div className="lg:col-span-1 min-h-[100px] max-h-[200px] lg:max-h-none">
                     <LogPanel logs={logs} />
                  </div>
             </div>
