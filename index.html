@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>像素自动地牢</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'VT323', monospace;
+        background-color: #050505;
+        color: #e0e0e0;
+        overflow: hidden; /* Prevent body scroll, manage within app */
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1a1a1a; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4a4a4a; 
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #666; 
+      }
+      
+      .pixel-border {
+        box-shadow: 
+          -4px 0 0 0 black,
+          4px 0 0 0 black,
+          0 -4px 0 0 black,
+          0 4px 0 0 black;
+        margin: 4px;
+      }
+      
+      .crt-overlay {
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+      }
+
+      /* Combat Animations */
+      @keyframes attack-lunge-up {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-30px) scale(1.1); }
+        100% { transform: translateY(0); }
+      }
+      @keyframes attack-lunge-down {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(30px) scale(1.1); }
+        100% { transform: translateY(0); }
+      }
+      @keyframes damage-shake {
+        0% { transform: translateX(0); filter: brightness(1); }
+        25% { transform: translateX(-5px); filter: brightness(5) sepia(1) hue-rotate(-50deg) saturate(5); } /* Red flash */
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); filter: brightness(1); }
+      }
+      @keyframes float-up {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+      }
+
+      .animate-attack-up {
+        animation: attack-lunge-up 0.4s ease-in-out;
+      }
+      .animate-attack-down {
+        animation: attack-lunge-down 0.4s ease-in-out;
+      }
+      .animate-damage {
+        animation: damage-shake 0.4s ease-in-out;
+      }
+      .animate-float-damage {
+        animation: float-up 0.8s ease-out forwards;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
