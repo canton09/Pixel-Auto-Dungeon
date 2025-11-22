@@ -310,7 +310,8 @@ function App() {
     else if (phase === GamePhase.MapTransition) {
       addLog("正在前往下一个区域...", 'info');
       const nextLevel = map.level + 1;
-      const nextMap = generateMap(nextLevel);
+      // Pass the current map's theme name to exclude it from the next generation
+      const nextMap = generateMap(nextLevel, map.theme.name);
       setMap(nextMap);
       setPartyPos(nextMap.startPos);
       setPhase(GamePhase.Exploring);

@@ -24,12 +24,12 @@ export const SLOT_DISPLAY: Record<EquipmentSlot, string> = {
 export const CLASS_SKILLS: Record<HeroClass, Skill[]> = {
   [HeroClass.Paladin]: [
     { name: "神圣打击", cost: 20, type: 'damage', power: 1.5, description: "强力的神圣攻击" },
-    { name: "圣光护盾", cost: 30, type: 'heal', power: 0.5, description: "恢复自身生命" }, // Simplified as heal for now
+    { name: "圣光护盾", cost: 30, type: 'heal', power: 0.5, description: "恢复自身生命" },
     { name: "审判", cost: 45, type: 'damage', power: 2.2, description: "终极单体伤害" }
   ],
   [HeroClass.Berserker]: [
     { name: "顺劈斩", cost: 25, type: 'aoe', power: 0.8, description: "攻击所有敌人" },
-    { name: "嗜血", cost: 0, type: 'damage', power: 1.2, description: "普通攻击但更强" }, // Passive-like
+    { name: "嗜血", cost: 0, type: 'damage', power: 1.2, description: "普通攻击但更强" },
     { name: "大地震击", cost: 50, type: 'damage', power: 2.5, description: "毁灭性打击" }
   ],
   [HeroClass.Assassin]: [
@@ -44,7 +44,7 @@ export const CLASS_SKILLS: Record<HeroClass, Skill[]> = {
   ],
   [HeroClass.Priest]: [
     { name: "快速治疗", cost: 20, type: 'heal', power: 1.5, description: "恢复队友生命" },
-    { name: "群体祷言", cost: 50, type: 'heal', power: 0.8, description: "恢复全队生命" }, // Note: Logic needs to handle AOE Heal
+    { name: "群体祷言", cost: 50, type: 'heal', power: 0.8, description: "恢复全队生命" },
     { name: "神圣之火", cost: 30, type: 'damage', power: 1.5, description: "神圣魔法伤害" }
   ],
   [HeroClass.Ranger]: [
@@ -153,11 +153,138 @@ export const MAP_THEMES: MapTheme[] = [
     enemyPrefixes: ["骷髅", "幽灵", "腐烂", "怨念", "骸骨", "吸血"],
     enemyBases: ["士兵", "弓手", "法师", "骑士", "蝙蝠"],
     bossNames: ["巫妖王", "死亡骑士"] 
+  },
+  // --- New Themes ---
+  {
+    name: "天空之城",
+    wallColor: "bg-[#e2e8f0]",
+    floorColor: "bg-[#bae6fd]",
+    bgGradient: "from-[#bae6fd] via-[#e0f2fe] to-[#ffffff]",
+    enemyPrefixes: ["神圣", "暴风", "云端", "翼族", "雷霆", "光明"],
+    enemyBases: ["狮鹫", "鹰身人", "天马", "云灵", "守望者"],
+    bossNames: ["风暴君王", "天空之主"]
+  },
+  {
+    name: "蒸汽堡垒",
+    wallColor: "bg-[#78350f]",
+    floorColor: "bg-[#271c19]",
+    bgGradient: "from-[#271c19] via-[#b45309] to-[#d97706]",
+    enemyPrefixes: ["蒸汽", "发条", "铜制", "齿轮", "增压", "铁甲"],
+    enemyBases: ["机器人", "机甲", "工程师", "炮手", "巡逻机"],
+    bossNames: ["蒸汽巨像", "齿轮霸主"]
+  },
+  {
+    name: "幻光森林",
+    wallColor: "bg-[#064e3b]",
+    floorColor: "bg-[#022c22]",
+    bgGradient: "from-[#022c22] via-[#059669] to-[#d8b4fe]",
+    enemyPrefixes: ["迷幻", "发光", "古老", "灵能", "翡翠", "月光"],
+    enemyBases: ["树人", "独角兽", "妖精", "花妖", "精灵龙"],
+    bossNames: ["森林古树", "月神化身"]
+  },
+  {
+    name: "巨龙巢穴",
+    wallColor: "bg-[#7f1d1d]",
+    floorColor: "bg-[#450a0a]",
+    bgGradient: "from-[#450a0a] via-[#dc2626] to-[#fbbf24]",
+    enemyPrefixes: ["烈焰", "黑鳞", "贪婪", "喷火", "远古", "狂暴"],
+    enemyBases: ["幼龙", "龙人", "狗头人", "双足飞龙", "火蜥蜴"],
+    bossNames: ["灭世魔龙", "红龙女王"]
+  },
+  {
+    name: "水晶矿洞",
+    wallColor: "bg-[#4c1d95]",
+    floorColor: "bg-[#2e1065]",
+    bgGradient: "from-[#2e1065] via-[#7c3aed] to-[#22d3ee]",
+    enemyPrefixes: ["晶化", "闪耀", "棱镜", "共鸣", "紫水晶", "坚硬"],
+    enemyBases: ["晶石像", "矿工", "噬石兽", "水晶蝎", "晶簇"],
+    bossNames: ["水晶皇后", "钻石魔像"]
+  },
+  {
+    name: "幽灵舰队",
+    wallColor: "bg-[#064e3b]",
+    floorColor: "bg-[#0f172a]",
+    bgGradient: "from-[#020617] via-[#115e59] to-[#0f172a]",
+    enemyPrefixes: ["溺亡", "幽灵", "藤壶", "深海", "被诅咒", "腐朽"],
+    enemyBases: ["海盗", "水手", "船长", "幽魂", "骷髅鹦鹉"],
+    bossNames: ["深海阎王", "幽灵船长"]
+  },
+  {
+    name: "真菌荒野",
+    wallColor: "bg-[#4a044e]",
+    floorColor: "bg-[#2e1065]",
+    bgGradient: "from-[#2e1065] via-[#a21caf] to-[#4ade80]",
+    enemyPrefixes: ["孢子", "致幻", "寄生", "肿胀", "剧毒", "荧光"],
+    enemyBases: ["蘑菇人", "真菌怪", "孢子蝠", "软泥", "感染者"],
+    bossNames: ["菌主", "腐化之心"]
+  },
+  {
+    name: "星际飞船",
+    wallColor: "bg-[#e5e5e5]",
+    floorColor: "bg-[#171717]",
+    bgGradient: "from-[#000000] via-[#262626] to-[#0ea5e9]",
+    enemyPrefixes: ["外星", "激光", "等离子", "变异", "星际", "赛博"],
+    enemyBases: ["异形", "陆战队", "机器人", "掠夺者", "生化人"],
+    bossNames: ["异形皇后", "星际督军"]
+  },
+  {
+    name: "熊猫竹林",
+    wallColor: "bg-[#14532d]",
+    floorColor: "bg-[#365314]",
+    bgGradient: "from-[#14532d] via-[#4ade80] to-[#fef9c3]",
+    enemyPrefixes: ["功夫", "隐世", "翠绿", "狂暴", "灵性", "醉酒"],
+    enemyBases: ["熊猫人", "猛虎", "金丝猴", "忍者", "竹妖"],
+    bossNames: ["醉拳大师", "竹林守护者"]
+  },
+  {
+    name: "吸血鬼庄园",
+    wallColor: "bg-[#450a0a]",
+    floorColor: "bg-[#000000]",
+    bgGradient: "from-[#000000] via-[#991b1b] to-[#450a0a]",
+    enemyPrefixes: ["嗜血", "苍白", "贵族", "暗夜", "鲜血", "永生"],
+    enemyBases: ["吸血鬼", "血仆", "狼人", "巨蝠", "石像鬼"],
+    bossNames: ["德古拉伯爵", "鲜血女王"]
+  },
+  {
+    name: "荒芜废土",
+    wallColor: "bg-[#78350f]",
+    floorColor: "bg-[#451a03]",
+    bgGradient: "from-[#451a03] via-[#d97706] to-[#a16207]",
+    enemyPrefixes: ["辐射", "变异", "狂暴", "拾荒", "生锈", "沙尘"],
+    enemyBases: ["掠夺者", "辐射蝎", "变种人", "沙虫", "暴徒"],
+    bossNames: ["废土军阀", "辐射巨兽"]
+  },
+  {
+    name: "暗影迷宫",
+    wallColor: "bg-[#18181b]",
+    floorColor: "bg-[#09090b]",
+    bgGradient: "from-[#000000] via-[#27272a] to-[#52525b]",
+    enemyPrefixes: ["无形", "漆黑", "绝望", "恐惧", "幻影", "沉默"],
+    enemyBases: ["影魔", "刺客", "梦魇", "黑影", "收割者"],
+    bossNames: ["暗影化身", "黑暗之主"]
+  },
+  {
+    name: "糖果乐园",
+    wallColor: "bg-[#fbcfe8]",
+    floorColor: "bg-[#fdf2f8]",
+    bgGradient: "from-[#fdf2f8] via-[#f472b6] to-[#fde047]",
+    enemyPrefixes: ["甜蜜", "粘稠", "酥脆", "暴躁", "巧克力", "姜饼"],
+    enemyBases: ["姜饼人", "软糖怪", "独角兽", "棉花糖", "曲奇兵"],
+    bossNames: ["糖果国王", "巧克力公爵"]
+  },
+  {
+    name: "泰坦遗迹",
+    wallColor: "bg-[#1e3a8a]",
+    floorColor: "bg-[#172554]",
+    bgGradient: "from-[#172554] via-[#1d4ed8] to-[#93c5fd]",
+    enemyPrefixes: ["奥术", "泰坦", "符文", "守护", "能量", "远古"],
+    enemyBases: ["构造体", "守护者", "魔像", "能量球", "法力浮龙"],
+    bossNames: ["泰坦守护者", "星界法师"]
   }
 ];
 
 export const ENEMY_TYPES_MAP: Record<string, EnemyType> = {
-  // Mapping bases to types for avatar generation
+  // Original
   "巨鼠": "beast", "软泥怪": "beast", "蚊虫": "beast", "鳄鱼": "beast", "多头蛇": "beast",
   "小鬼": "demon", "火元素": "demon", "地狱犬": "beast", "炎魔": "demon", "红龙雏": "beast",
   "雪狼": "beast", "冰巨人": "humanoid", "雪怪": "beast", "冰魂": "undead", "极地熊": "beast",
@@ -165,14 +292,56 @@ export const ENEMY_TYPES_MAP: Record<string, EnemyType> = {
   "行者": "humanoid", "吞噬者": "demon", "眼魔": "demon", "触手怪": "beast", "魅影": "undead",
   "木乃伊": "undead", "圣甲虫": "beast", "石像鬼": "construct", "祭司": "humanoid", "阿努比斯卫士": "humanoid",
   "娜迦": "humanoid", "巨蟹": "beast", "灯笼鱼": "beast", "海怪": "beast", "狂鲨": "beast",
-  "士兵": "undead", "弓手": "undead", "法师": "undead", "骑士": "undead", "蝙蝠": "beast"
+  "士兵": "undead", "弓手": "undead", "法师": "undead", "骑士": "undead", "蝙蝠": "beast",
+  
+  // Sky City
+  "狮鹫": "beast", "鹰身人": "demon", "天马": "beast", "云灵": "demon", "守望者": "humanoid",
+  
+  // Steampunk
+  "机器人": "construct", "机甲": "construct", "工程师": "humanoid", "炮手": "humanoid", "巡逻机": "construct",
+  
+  // Forest
+  "树人": "beast", "独角兽": "beast", "妖精": "humanoid", "花妖": "demon", "精灵龙": "beast",
+  
+  // Dragon
+  "幼龙": "beast", "龙人": "humanoid", "狗头人": "demon", "双足飞龙": "beast", "火蜥蜴": "beast",
+  
+  // Crystal
+  "晶石像": "construct", "矿工": "humanoid", "噬石兽": "beast", "水晶蝎": "beast", "晶簇": "construct",
+  
+  // Ghost Ship
+  "海盗": "undead", "水手": "undead", "船长": "undead", "幽魂": "undead", "骷髅鹦鹉": "undead",
+  
+  // Fungal
+  "蘑菇人": "beast", "真菌怪": "beast", "孢子蝠": "beast", "软泥": "beast", "感染者": "undead",
+  
+  // Starship
+  "异形": "demon", "陆战队": "humanoid", "掠夺者": "humanoid", "生化人": "construct",
+  
+  // Bamboo
+  "熊猫人": "humanoid", "猛虎": "beast", "金丝猴": "beast", "忍者": "humanoid", "竹妖": "demon",
+  
+  // Vampire
+  "吸血鬼": "humanoid", "血仆": "humanoid", "狼人": "beast", "巨蝠": "beast",
+  
+  // Wasteland
+  "辐射蝎": "beast", "变种人": "humanoid", "沙虫": "beast", "暴徒": "humanoid",
+  
+  // Shadow
+  "影魔": "demon", "刺客": "humanoid", "梦魇": "demon", "黑影": "undead", "收割者": "undead",
+  
+  // Candy
+  "姜饼人": "construct", "软糖怪": "beast", "棉花糖": "demon", "曲奇兵": "construct",
+  
+  // Titan
+  "构造体": "construct", "守护者": "construct", "魔像": "construct", "能量球": "construct", "法力浮龙": "beast"
 };
 
-export const ITEM_PREFIXES = ["生锈的", "普通的", "精良的", "强化的", "附魔的", "远古的", "赛博的", "神圣的", "诅咒的", "宇宙的"];
+export const ITEM_PREFIXES = ["生锈的", "普通的", "精良的", "强化的", "附魔的", "远古的", "赛博的", "神圣的", "诅咒的", "宇宙的", "龙骨的", "虚空的", "泰坦的", "晶能的", "蒸汽的"];
 export const ITEM_BASES: Record<EquipmentSlot, string[]> = {
-  [EquipmentSlot.Weapon]: ["长剑", "战斧", "匕首", "法杖", "魔棒", "长弓", "战锤", "利刃", "权杖", "光束枪"],
-  [EquipmentSlot.Head]: ["头盔", "软帽", "兜帽", "面甲", "皇冠", "面具", "头巾", "战盔", "光环", "兽角"],
-  [EquipmentSlot.Body]: ["铠甲", "法袍", "背心", "板甲", "外衣", "战斗服", "披风", "锁子甲", "硬壳", "甲壳"],
-  [EquipmentSlot.Hands]: ["手套", "护手", "护腕", "拳套", "护指", "利爪", "臂铠", "绷带", "触摸", "铁拳"],
-  [EquipmentSlot.Feet]: ["战靴", "护胫", "凉鞋", "便鞋", "履带", "行者", "长靴", "铁鞋", "兽爪", "蹄铁"]
+  [EquipmentSlot.Weapon]: ["长剑", "战斧", "匕首", "法杖", "魔棒", "长弓", "战锤", "利刃", "权杖", "光束枪", "光剑", "巨剑", "十字弩", "灵珠"],
+  [EquipmentSlot.Head]: ["头盔", "软帽", "兜帽", "面甲", "皇冠", "面具", "头巾", "战盔", "光环", "兽角", "护目镜", "光环", "鬼面"],
+  [EquipmentSlot.Body]: ["铠甲", "法袍", "背心", "板甲", "外衣", "战斗服", "披风", "锁子甲", "硬壳", "甲壳", "动力甲", "忍者服", "灵纹布"],
+  [EquipmentSlot.Hands]: ["手套", "护手", "护腕", "拳套", "护指", "利爪", "臂铠", "绷带", "触摸", "铁拳", "机械臂", "龙爪"],
+  [EquipmentSlot.Feet]: ["战靴", "护胫", "凉鞋", "便鞋", "履带", "行者", "长靴", "铁鞋", "兽爪", "蹄铁", "喷射靴", "云履"]
 };

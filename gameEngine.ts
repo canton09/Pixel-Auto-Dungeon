@@ -26,8 +26,18 @@ export const generateHero = (id: number, hClass: HeroClass): Hero => {
   };
 };
 
-export const generateMap = (level: number): GameMap => {
-  const theme = MAP_THEMES[Math.floor(Math.random() * MAP_THEMES.length)];
+export const generateMap = (level: number, previousThemeName?: string): GameMap => {
+  let availableThemes = MAP_THEMES;
+  
+  // If a previous theme exists, filter it out to ensure variety
+  if (previousThemeName) {
+      availableThemes = MAP_THEMES.filter(t => t.name !== previousThemeName);
+  }
+  // Fallback if something goes wrong (shouldn't happen with >1 theme)
+  if (availableThemes.length === 0) availableThemes = MAP_THEMES;
+
+  const theme = availableThemes[Math.floor(Math.random() * availableThemes.length)];
+  
   const tiles: MapTile[][] = Array(MAP_SIZE).fill(null).map((_, y) => 
     Array(MAP_SIZE).fill(null).map((_, x) => ({
       x, y, type: 'wall', explored: false, visible: false
